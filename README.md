@@ -1,7 +1,7 @@
 # CivicFix
 
 ## NB
-***This prototype requires external services & it will <strong>NOT</strong> run without proper configuration.***
+***This prototype requires external services & it will <strong>NOT</strong> run properly without proper configuration - please read for instructions on how to configure.***
 
 This is a prototype app that lets users report issues and suggestions in their local area to the local government. It’s an exercise in direct democracy, civic participation, and giving people a clear voice—map-based reporting, case tracking, and optional public sharing, so the community and admins can see what matters locally.
  
