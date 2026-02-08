@@ -40,15 +40,6 @@ This is a prototype app that lets users report issues and suggestions in their l
 
 Landing page videos are NOT in the repo because of size limit. These visually enhance the site, but are not present here. Add `landing-page-video.mp4` and `landing-page-video-2.mp4` into `client/public/videos/`; download from the links in that folder’s README (Pexels blocks direct embedding, so files MUST be local for the scope of this prototype).
 
-## Deploy to GitHub Pages
-
-From the repo root run:
-
-```bash
-npm run deploy:gh
-```
-
-Then in the repo **Settings → Pages** set **Source** to **Deploy from a branch**, branch **gh-pages**, folder **/ (root)**. The app will be at `https://<username>.github.io/civic-fix/` (landing at `/civic-fix/civicfix`). The backend and database are not deployed; the GitHub Pages build is for the front-end only (e.g. demo or docs).
 
 ## Licence
 
