@@ -28,6 +28,7 @@ import AdminInbox from './pages/AdminInbox';
 function App() {
   return (
     <Router
+      basename={import.meta.env.BASE_URL.replace(/\/$/, '')}
       future={{
         v7_startTransition: true,
         v7_relativeSplatPath: true,

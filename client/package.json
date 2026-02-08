@@ -33,6 +33,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:gh": "vite build --mode gh-pages",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
