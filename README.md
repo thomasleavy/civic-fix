@@ -1,12 +1,12 @@
 # CivicFix
 
-A prototype app that lets users report issues and suggestions in their local area to local government. It’s an exercise in direct democracy, civic participation, and giving residents a clear voice—map-based reporting, case tracking, and optional public sharing so the community and admins can see what matters locally.
+This is a prototype app that lets users report issues and suggestions in their local area to the local government. It’s an exercise in direct democracy, civic participation, and giving people a clear voice—map-based reporting, case tracking, and optional public sharing, so the community and admins can see what matters locally.
 
 ## Tech stack
 
 - **Frontend:** React 18, TypeScript, Vite, React Router, TanStack Query, React Hook Form, Tailwind CSS, Leaflet/React-Leaflet, ReCAPTCHA.
 - **Backend:** Node.js, Express, TypeScript, JWT auth, PostgreSQL (with raw SQL and migrations), Multer (uploads), Nodemailer, optional Cloudinary.
-- **Notable implementation:** County-scoped admin roles and locations, ban system with details API, theme persistence per user, admin inbox with unread count, multi-image upload (issues/suggestions) with carousel UI, public/private visibility for submissions, appraisals (likes), trending and analytics, rate limiting and CORS handling.
+- **Notable implementation:** County-scoped admin roles and locations, ban system, theme persistence per user, i.e. dark/lightmode, admin inbox with unread count, multi-image upload (issues/suggestions) with carousel, public/private visibility for submissions, appraisals (likes), trending and analytics, rate limiting, CORS handling, Weather API, News API.
 
 ## Get it running locally
 
@@ -35,7 +35,7 @@ A prototype app that lets users report issues and suggestions in their local are
    - API: http://localhost:5000  
    - App: http://localhost:3000 (landing at `/civicfix`)
 
-Landing page videos are not in the repo (size limit). Add `landing-page-video.mp4` and `landing-page-video-2.mp4` into `client/public/videos/`; download from the links in that folder’s README (Pexels blocks direct embedding, so files must be local).
+Landing page videos are NOT in the repo because of size limit. These visually enhance the site, but are not present here. Add `landing-page-video.mp4` and `landing-page-video-2.mp4` into `client/public/videos/`; download from the links in that folder’s README (Pexels blocks direct embedding, so files MUST be local for the scope of this prototype).
 
 ## Licence
 
