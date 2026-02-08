@@ -1,7 +1,8 @@
 # CivicFix
 
-A hosted UI demo is available here:
+Hosted UI demo available here:
 https://thomasleavy.github.io/civic-fix/civicfix
+
 This deployment runs the <strong>frontend only</strong>. The backend server and PostgreSQL database are not included, so the following features are disabled in the demo:
 	•	User registration and login
 	•	Submitting issues or suggestions
