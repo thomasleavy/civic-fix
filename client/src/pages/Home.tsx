@@ -38,7 +38,8 @@ const Home = () => {
     }
   }, [activeTab, recaptchaSiteKey]);
 
-  // Video cycling state
+  // Local videos only (Pexels CDN returns 403 when embedded from other origins)
+  // Download from: https://www.pexels.com/video/stunning-aerial-sunrise-over-irish-cityscape-28824280/ | https://www.pexels.com/video/aerial-footage-of-a-town-surrounded-by-scenic-natural-landscape-2386450/
   const videos = ['/videos/landing-page-video.mp4', '/videos/landing-page-video-2.mp4'];
   const videoCredits = [
     { name: 'Jays Photography', url: 'https://www.pexels.com/@jaysphotography/' },
@@ -48,35 +49,24 @@ const Home = () => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const handleVideoEnd = () => {
-    // Cycle to next video
     const nextIndex = (currentVideoIndex + 1) % videos.length;
     setCurrentVideoIndex(nextIndex);
-    
-    // Update video source directly to avoid flash
     const currentVideo = videoRefs.current[0];
     if (currentVideo) {
       currentVideo.src = videos[nextIndex];
       currentVideo.load();
-      currentVideo.play().catch((e) => {
-        // Autoplay might be blocked, but video will play when user interacts
-        console.log('Video autoplay prevented:', e);
-      });
+      currentVideo.play().catch((e) => console.log('Video autoplay prevented:', e));
     }
   };
 
-  // Set initial video source and ensure video plays on mount
   useEffect(() => {
     const currentVideo = videoRefs.current[0];
     if (currentVideo) {
-      // Set initial source if not already set
-      if (!currentVideo.src || currentVideo.src.endsWith('undefined')) {
+      if (!currentVideo.src || !currentVideo.src.includes(videos[currentVideoIndex])) {
         currentVideo.src = videos[currentVideoIndex];
         currentVideo.load();
       }
-      currentVideo.play().catch((e) => {
-        // Autoplay might be blocked, but video will play when user interacts
-        console.log('Video autoplay prevented:', e);
-      });
+      currentVideo.play().catch((e) => console.log('Video autoplay prevented:', e));
     }
   }, []);
 
@@ -268,11 +258,7 @@ const Home = () => {
             preload="auto"
             className="absolute inset-0 w-full h-full object-cover"
             onEnded={handleVideoEnd}
-            onError={(e) => {
-              // If video fails to load, try next video
-              console.error('Video failed to load, cycling to next:', e);
-              handleVideoEnd();
-            }}
+            onError={() => handleVideoEnd()}
           />
           
           {/* Overlay for better text readability */}
@@ -362,11 +348,7 @@ const Home = () => {
             preload="auto"
             className="absolute inset-0 w-full h-full object-cover"
             onEnded={handleVideoEnd}
-            onError={(e) => {
-              // If video fails to load, try next video
-              console.error('Video failed to load, cycling to next:', e);
-              handleVideoEnd();
-            }}
+            onError={() => handleVideoEnd()}
           />
           
           {/* Overlay for better text readability */}
@@ -472,11 +454,7 @@ const Home = () => {
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
           onEnded={handleVideoEnd}
-          onError={(e) => {
-            // If video fails to load, try next video
-            console.error('Video failed to load, cycling to next:', e);
-            handleVideoEnd();
-          }}
+          onError={() => handleVideoEnd()}
         />
         
         {/* Overlay for better text readability */}
