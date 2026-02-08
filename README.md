@@ -1,7 +1,14 @@
 # CivicFix
 
-## NB
-***This prototype requires external services & it will <strong>NOT</strong> run properly without proper configuration - please read for instructions on how to configure.***
+A hosted UI demo is available here:
+https://thomasleavy.github.io/civic-fix/civicfix
+This deployment runs the <strong>frontend only</strong>. The backend server and PostgreSQL database are not included, so the following features are disabled in the demo:
+	•	User registration and login
+	•	Submitting issues or suggestions
+	•	Admin tools
+	•	Persistent data storage
+
+To use the full application with authentication and data persistence, run the project locally using the setup instructions <strong>below</strong>.
 
 This is a prototype app that lets users report issues and suggestions in their local area to the local government. It’s an exercise in direct democracy, civic participation, and giving people a clear voice—map-based reporting, case tracking, and optional public sharing, so the community and admins can see what matters locally.
  
