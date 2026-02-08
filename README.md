@@ -3,7 +3,7 @@
 This is a prototype app that lets users report issues and suggestions in their local area to the local government. It’s an exercise in direct democracy, civic participation, and giving people a clear voice—map-based reporting, case tracking, and optional public sharing, so the community and admins can see what matters locally.
  
 ## Tech stack 
-
+ 
 - **Frontend:** React 18, TypeScript, Vite, React Router, TanStack Query, React Hook Form, Tailwind CSS, Leaflet/React-Leaflet, ReCAPTCHA.
 - **Backend:** Node.js, Express, TypeScript, JWT auth, PostgreSQL (with raw SQL and migrations), Multer (uploads), Nodemailer, optional Cloudinary.
 - **Notable implementation:** County-scoped admin roles and locations, ban system, theme persistence per user, i.e. dark/lightmode, admin inbox with unread count, multi-image upload (issues/suggestions) with carousel, public/private visibility for submissions, appraisals (likes), trending and analytics, rate limiting, CORS handling, Weather API, News API.
