@@ -38,14 +38,12 @@ const Home = () => {
     }
   }, [activeTab, recaptchaSiteKey]);
 
-  // Single landing video: local file (optional), fallback URL for live site (Pexels blocks direct embed, so use a CORS-friendly placeholder)
-  // Credit: Keppy on Pexels - https://www.pexels.com/@keppy/ (when using local file)
-  const videoLocal = '/videos/landing-page-video.mp4';
-  const videoRemote = 'https://lorem.video/1280x720'; // works on live site; replace with your own hosted MP4 if you want a specific video
+  // Single landing video: same file locally and on live site (we keep it in the gh-pages deploy)
+  // Credit: Keppy on Pexels - https://www.pexels.com/@keppy/
+  const videoLocal = `${import.meta.env.BASE_URL}videos/landing-page-video.mp4`;
+  const videoRemote = 'https://lorem.video/1280x720'; // fallback only if the local file is missing
   const videoCredit = { name: 'Keppy', url: 'https://www.pexels.com/@keppy/' };
-  // On live site (gh-pages) there is no local video; use remote immediately so video appears without a failed request
-  const isLiveSite = typeof window !== 'undefined' && window.location.origin.includes('github.io');
-  const [videoSrc, setVideoSrc] = useState(() => (isLiveSite ? videoRemote : videoLocal));
+  const [videoSrc, setVideoSrc] = useState(videoLocal);
   const videoRefs = useRef<HTMLVideoElement | null>(null);
 
   const handleVideoError = () => {
