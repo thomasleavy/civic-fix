@@ -38,12 +38,14 @@ const Home = () => {
     }
   }, [activeTab, recaptchaSiteKey]);
 
-  // Single landing video: same file locally and on live site (we keep it in the gh-pages deploy)
+  // Single landing video: local file when present; on live site (gh-pages) we strip it (111 MB > 100 MB limit), so use remote.
+  // To show your Keppy video on live: compress to <100 MB and add it back to the deploy, or host the MP4 elsewhere and set videoRemote to that URL.
   // Credit: Keppy on Pexels - https://www.pexels.com/@keppy/
   const videoLocal = `${import.meta.env.BASE_URL}videos/landing-page-video.mp4`;
-  const videoRemote = 'https://lorem.video/1280x720'; // fallback only if the local file is missing
+  const videoRemote = 'https://lorem.video/1280x720'; // used on live site; replace with your hosted MP4 for your chosen video
   const videoCredit = { name: 'Keppy', url: 'https://www.pexels.com/@keppy/' };
-  const [videoSrc, setVideoSrc] = useState(videoLocal);
+  const isLiveSite = typeof window !== 'undefined' && window.location.origin.includes('github.io');
+  const [videoSrc, setVideoSrc] = useState(() => (isLiveSite ? videoRemote : videoLocal));
   const videoRefs = useRef<HTMLVideoElement | null>(null);
 
   const handleVideoError = () => {
