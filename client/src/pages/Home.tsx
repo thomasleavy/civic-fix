@@ -38,37 +38,34 @@ const Home = () => {
     }
   }, [activeTab, recaptchaSiteKey]);
 
-  // Local videos only (Pexels CDN returns 403 when embedded from other origins)
-  // Download from: https://www.pexels.com/video/stunning-aerial-sunrise-over-irish-cityscape-28824280/ | https://www.pexels.com/video/aerial-footage-of-a-town-surrounded-by-scenic-natural-landscape-2386450/
-  const videos = ['/videos/landing-page-video.mp4', '/videos/landing-page-video-2.mp4'];
-  const videoCredits = [
-    { name: 'Jays Photography', url: 'https://www.pexels.com/@jaysphotography/' },
-    { name: 'Kelly', url: 'https://www.pexels.com/@kelly/' }
-  ];
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  // Single landing video: local file (optional), fallback to URL for live site (gh-pages)
+  // Credit: Keppy on Pexels - https://www.pexels.com/@keppy/
+  const videoLocal = '/videos/landing-page-video.mp4';
+  const videoRemote = 'https://videos.pexels.com/video-files/28824280/28824280-hd_720_1280_25fps.mp4'; // fallback when no local file (e.g. live site)
+  const videoCredit = { name: 'Keppy', url: 'https://www.pexels.com/@keppy/' };
+  const [videoSrc, setVideoSrc] = useState(videoLocal);
+  const videoRefs = useRef<HTMLVideoElement | null>(null);
 
-  const handleVideoEnd = () => {
-    const nextIndex = (currentVideoIndex + 1) % videos.length;
-    setCurrentVideoIndex(nextIndex);
-    const currentVideo = videoRefs.current[0];
-    if (currentVideo) {
-      currentVideo.src = videos[nextIndex];
-      currentVideo.load();
-      currentVideo.play().catch((e) => console.log('Video autoplay prevented:', e));
+  const handleVideoError = () => {
+    if (videoSrc === videoLocal) {
+      setVideoSrc(videoRemote);
+      const el = videoRefs.current;
+      if (el) {
+        el.src = videoRemote;
+        el.load();
+        el.play().catch(() => {});
+      }
     }
   };
 
   useEffect(() => {
-    const currentVideo = videoRefs.current[0];
+    const currentVideo = videoRefs.current;
     if (currentVideo) {
-      if (!currentVideo.src || !currentVideo.src.includes(videos[currentVideoIndex])) {
-        currentVideo.src = videos[currentVideoIndex];
-        currentVideo.load();
-      }
+      currentVideo.src = videoSrc;
+      currentVideo.load();
       currentVideo.play().catch((e) => console.log('Video autoplay prevented:', e));
     }
-  }, []);
+  }, [videoSrc]);
 
   const loginForm = useForm<LoginFormData>();
   const registerForm = useForm<RegisterFormData>();
@@ -244,21 +241,21 @@ const Home = () => {
           {/* Video Background */}
           <video
             ref={(el) => { 
-              videoRefs.current[0] = el;
+              videoRefs.current = el;
               // Set initial source when ref is attached
               if (el) {
-                el.src = videos[currentVideoIndex];
+                el.src = videoSrc;
                 el.load();
               }
             }}
-            src={videos[currentVideoIndex]}
+            src={videoSrc}
             autoPlay
             muted
             playsInline
             preload="auto"
             className="absolute inset-0 w-full h-full object-cover"
-            onEnded={handleVideoEnd}
-            onError={() => handleVideoEnd()}
+            loop
+            onError={handleVideoError}
           />
           
           {/* Overlay for better text readability */}
@@ -267,13 +264,13 @@ const Home = () => {
           {/* Video Attribution */}
           <div className="absolute bottom-2 right-2 z-20">
             <a 
-              href={videoCredits[currentVideoIndex].url} 
+              href={videoCredit.url} 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-white/70 hover:text-white text-xs transition-colors flex items-center gap-1"
             >
               <span>Video by</span>
-              <span className="underline">{videoCredits[currentVideoIndex].name}</span>
+              <span className="underline">{videoCredit.name}</span>
               <span>on Pexels</span>
             </a>
           </div>
@@ -334,21 +331,21 @@ const Home = () => {
           {/* Video Background */}
           <video
             ref={(el) => { 
-              videoRefs.current[0] = el;
+              videoRefs.current = el;
               // Set initial source when ref is attached
               if (el) {
-                el.src = videos[currentVideoIndex];
+                el.src = videoSrc;
                 el.load();
               }
             }}
-            src={videos[currentVideoIndex]}
+            src={videoSrc}
             autoPlay
             muted
             playsInline
             preload="auto"
             className="absolute inset-0 w-full h-full object-cover"
-            onEnded={handleVideoEnd}
-            onError={() => handleVideoEnd()}
+            loop
+            onError={handleVideoError}
           />
           
           {/* Overlay for better text readability */}
@@ -357,13 +354,13 @@ const Home = () => {
           {/* Video Attribution */}
           <div className="absolute bottom-2 right-2 z-20">
             <a 
-              href={videoCredits[currentVideoIndex].url} 
+              href={videoCredit.url} 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-white/70 hover:text-white text-xs transition-colors flex items-center gap-1"
             >
               <span>Video by</span>
-              <span className="underline">{videoCredits[currentVideoIndex].name}</span>
+              <span className="underline">{videoCredit.name}</span>
               <span>on Pexels</span>
             </a>
           </div>
@@ -440,21 +437,21 @@ const Home = () => {
         {/* Video Background */}
         <video
           ref={(el) => { 
-            videoRefs.current[0] = el;
+            videoRefs.current = el;
             // Set initial source when ref is attached
             if (el) {
-              el.src = videos[currentVideoIndex];
+              el.src = videoSrc;
               el.load();
             }
           }}
-          src={videos[currentVideoIndex]}
+          src={videoSrc}
           autoPlay
           muted
           playsInline
           preload="auto"
+          loop
           className="absolute inset-0 w-full h-full object-cover"
-          onEnded={handleVideoEnd}
-          onError={() => handleVideoEnd()}
+          onError={handleVideoError}
         />
         
         {/* Overlay for better text readability */}
@@ -463,13 +460,13 @@ const Home = () => {
         {/* Video Attribution */}
         <div className="absolute bottom-2 right-2 z-20">
           <a 
-            href={videoCredits[currentVideoIndex].url} 
+            href={videoCredit.url} 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-white/70 hover:text-white text-xs transition-colors flex items-center gap-1"
           >
             <span>Video by</span>
-            <span className="underline">{videoCredits[currentVideoIndex].name}</span>
+            <span className="underline">{videoCredit.name}</span>
             <span>on Pexels</span>
           </a>
         </div>

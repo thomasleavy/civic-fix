@@ -1,8 +1,6 @@
-# Landing page videos (required for hero video)
+# Landing page video (optional for local; fallback URL used on live site)
 
-Pexels does not allow direct embedding from other sites (403), so the app only uses local files. Add these two files here (not in the repo due to GitHub’s 100 MB limit):
+One video is shown on the landing page, credited to **Keppy** (Pexels: https://www.pexels.com/@keppy/).
 
-- **landing-page-video.mp4** — [Stunning aerial sunrise over Irish cityscape](https://www.pexels.com/video/stunning-aerial-sunrise-over-irish-cityscape-28824280/) (Jays Photography)
-- **landing-page-video-2.mp4** — [Aerial footage of a town surrounded by scenic natural landscape](https://www.pexels.com/video/aerial-footage-of-a-town-surrounded-by-scenic-natural-landscape-2386450/) (Kelly)
-
-Download from the Pexels links, rename to the names above, and place in this folder. Without them, the hero area will show a broken video (no console errors from Pexels 403 once local-only is used).
+- **Locally:** Add `landing-page-video.mp4` here if you want to use your own file (e.g. from [Pexels](https://www.pexels.com/search/videos/)). If the file is missing, the app tries a remote URL so the video can still play.
+- **Live site (gh-pages):** No local file is deployed (size limit). The app uses a remote video URL so the hero video can play on https://thomasleavy.github.io/civic-fix/.
