@@ -11,7 +11,7 @@
     "build:server": "npm run build --prefix server",
     "build:client": "npm run build --prefix client",
     "build:client:gh": "npm run build:gh --prefix client",
-    "deploy:gh": "npm run build:client:gh && node scripts/copy-404.js && node scripts/remove-gh-videos.js && npx gh-pages -d client/dist",
+    "deploy:gh": "npm run build:client:gh && node scripts/copy-404.js && node scripts/remove-gh-videos.js && npx gh-pages-clean && npx gh-pages -d client/dist",
     "build": "npm run build:server && npm run build:client",
     "migrate": "npm run migrate --prefix server",
     "start:server": "npm start --prefix server",
